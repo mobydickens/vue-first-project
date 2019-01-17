@@ -7,21 +7,30 @@
     </header>
     <hr/>
     <section v-if='showForm'>
-      <h1>Create here</h1>
+      <Create 
+        v-bind:getBots='getBots'
+        v-bind:showCollection='showCollection'
+      />
     </section>
     <section v-else>
-      <h1>Collection here</h1>
+      <Botlist 
+        :bots='bots'
+        :retire='retire'
+      />
     </section>
   </div>
 </template>
 
 <script>
 import Create from './components/Create';
+import Botlist from './components/Botlist';
+
 export default {
   name: 'Home',
   data() {
     return {
       showForm: true,
+      bots: []
     }
   },
   methods: {
@@ -30,10 +39,17 @@ export default {
     },
     showCollection() {
       this.showForm = false
+    },
+    getBots(botArray) {
+      this.bots.push(botArray);
+    },
+    retire(botName) {
+      this.bots = this.bots.filter(bot => botName !== bot.botName);
     }
   },
   components: {
-    Create
+    Create,
+    Botlist
   }
 }
 </script>
