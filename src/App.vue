@@ -1,17 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header class='header'>
+      <h4 @click='showCreate'>Create</h4>
+      <h1>Battle Bots</h1>
+      <h4 @click='showCollection'>Collection</h4>
+    </header>
+    <hr/>
+    <section v-if='showForm'>
+      <h1>Create here</h1>
+    </section>
+    <section v-else>
+      <h1>Collection here</h1>
+    </section>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Create from './components/Create';
 export default {
-  name: 'app',
+  name: 'Home',
+  data() {
+    return {
+      showForm: true,
+    }
+  },
+  methods: {
+    showCreate() {
+      this.showForm = true
+    },
+    showCollection() {
+      this.showForm = false
+    }
+  },
   components: {
-    HelloWorld
+    Create
   }
 }
 </script>
@@ -23,6 +45,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
